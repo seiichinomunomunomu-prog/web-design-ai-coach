@@ -1,0 +1,154 @@
+# WEB Design AI Coach
+
+## 概要
+
+HTML・CSSコードを入力すると、AIがコードレビュー・改善提案を行うWebアプリケーションです。
+
+対象
+
+- Webデザイン初学者
+- HTML/CSS学習者
+- ポートフォリオ作成中の方
+
+---
+
+# 開発環境
+
+- Python 3.14
+- FastAPI
+- Uvicorn
+- Jinja2
+- HTML5
+- CSS3
+- VS Code
+- Dify（予定）
+- Render（予定）
+
+---
+
+# フォルダ構成
+
+```
+app/
+├── main.py
+├── templates/
+│   └── index.html
+├── static/
+│   └── css/
+│       └── style.css
+└── .venv/
+```
+
+---
+
+# 現在の実装状況
+
+## Phase1　環境構築　✅
+
+- Python
+- 仮想環境
+- FastAPI
+- Uvicorn
+
+---
+
+## Phase2　画面表示　✅
+
+- HTML表示
+- CSS適用
+- Jinja2
+- StaticFiles
+
+---
+
+## Phase3　フォーム送信　✅
+
+入力
+
+- HTMLコード
+- CSSコード
+- 質問内容
+
+処理
+
+- POST送信
+- Form受信
+- JSON表示確認
+
+完成フロー
+
+```
+ブラウザ
+    ↓
+HTMLフォーム
+    ↓
+POST /review
+    ↓
+FastAPI
+    ↓
+JSON表示
+```
+
+---
+
+# 開発再開手順
+
+① VS Code起動
+
+② web-design-AI-coach を開く
+
+③ ターミナル
+
+```
+cd app
+```
+
+④
+
+```
+.\.venv\Scripts\Activate.ps1
+```
+
+⑤
+
+```
+py -m uvicorn main:app --reload
+```
+
+⑥
+
+ブラウザ
+
+```
+http://127.0.0.1:8000
+```
+
+---
+
+# 次回
+
+Phase4
+
+FastAPI
+
+↓
+
+Dify API接続
+
+↓
+
+AIレビュー取得
+
+↓
+
+review.html表示
+
+---
+
+# 今後予定
+
+- AIレビュー表示
+- コードハイライト
+- ローディング表示
+- Render公開
+- オリジナルドメイン

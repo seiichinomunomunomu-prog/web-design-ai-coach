@@ -1,0 +1,277 @@
+# Learning Note
+
+## FastAPIとは
+
+ブラウザからリクエストを受け取り、
+
+処理を行い、
+
+結果を返すWebアプリケーションフレームワーク。
+
+---
+
+## Uvicornとは
+
+FastAPIを動かすWebサーバー。
+
+起動中だけ
+
+```
+http://127.0.0.1:8000
+```
+
+へアクセスできる。
+
+停止すると接続できなくなる。
+
+---
+
+## Webサーバーとは
+
+現在
+
+```
+VS Code
+
+↓
+
+main.py
+
+↓
+
+Uvicorn
+
+↓
+
+127.0.0.1:8000
+```
+
+将来
+
+```
+Render
+
+↓
+
+FastAPI
+
+↓
+
+https://xxxxx.onrender.com
+```
+
+になる。
+
+---
+
+## Jinja2とは
+
+FastAPIからHTMLへデータを渡すテンプレートエンジン。
+
+今後
+
+```
+AIレビュー
+
+↓
+
+Jinja2
+
+↓
+
+HTML表示
+```
+
+になる。
+
+---
+
+## StaticFiles
+
+FastAPIでは
+
+```
+/static
+```
+
+というURLを公開する。
+
+HTMLから
+
+```
+/static/css/style.css
+```
+
+と書けば
+
+```
+app/static/css/style.css
+```
+
+を読み込める。
+
+---
+
+## 仮想環境
+
+毎回
+
+```
+.\.venv\Scripts\Activate.ps1
+```
+
+が必要。
+
+(.venv)
+
+が表示されたら有効。
+
+---
+
+## HTML
+
+フォーム送信
+
+```
+<form method="post" action="/review">
+```
+
+ボタン
+
+```
+<button type="submit">
+```
+
+---
+
+## POST
+
+フォーム
+
+↓
+
+FastAPI
+
+↓
+
+Form()
+
+↓
+
+JSON
+
+という流れ。
+
+---
+
+## 今回理解できたこと
+
+HTML
+
+↓
+
+FastAPI
+
+↓
+
+JSON
+
+の流れを構築できた。
+
+次回は
+
+```
+HTML
+
+↓
+
+FastAPI
+
+↓
+
+Dify
+
+↓
+
+AIレビュー
+
+↓
+
+HTML表示
+```
+
+へ進む。
+
+---
+
+# トラブル集
+
+## Python
+
+IndentationError
+
+原因
+
+インデント崩れ。
+
+Pythonはインデントが文法。
+
+---
+
+## HTML
+
+<form>
+
+タグが崩れると
+
+POSTされない。
+
+---
+
+## CSS
+
+FastAPIでは
+
+```
+/static/css/style.css
+```
+
+を使用。
+
+相対パス
+
+```
+../static
+```
+
+は使用しない。
+
+---
+
+## スペースキー不具合
+
+確認事項
+
+- HP EliteBook 830 G8
+- スペースキーのみ暴走
+- 外付けUSB正常
+- Escで停止
+
+影響
+
+- インデント崩れ
+- HTMLタグ崩れ
+
+コード異常時は
+
+まずキーボード誤入力も疑う。
+
+---
+
+# 開発で意識すること
+
+- 小さく作る
+- 小さく確認する
+- エラーは1つずつ解決する
+- 保存(Ctrl+S)を習慣化する
+- JSONで受信確認してから次へ進む
