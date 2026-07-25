@@ -1,0 +1,32 @@
+【次回作業】
+
+□ .envへ実際のDify APIキー入力
+
+□ app/.envを.gitignore対象にすることを確認
+
+□ Dify API通信実装
+
+FastAPI
+    ↓
+requests.post()
+    ↓
+Dify API
+    ↓
+AI回答取得
+
+□ review()でAI回答を取得
+
+□ ブラウザへAI添削結果表示
+
+□ config.py削除
+（通信成功確認後）
+
+□ Gitコミット
+
+コミット候補
+
+"Dify API連携開始"
+
+または
+
+"Phase4 Dify API通信実装"

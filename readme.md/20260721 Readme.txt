@@ -1,0 +1,46 @@
+【2026/07/21 作業内容】
+
+■ Phase4開始（Dify API連携）
+
+・requestsライブラリをインストール
+・python-dotenvをインストール
+・Dify APIキー管理方法を見直し
+
+■ セキュリティ改善
+
+・config.pyによるAPIキー管理から.env管理へ移行開始
+・main.pyをdotenvからAPIキー取得する構成へ変更
+
+追加内容
+-----------------------------
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+DIFY_API_KEY = os.getenv("DIFY_API_KEY")
+
+■ 動作確認
+
+・FastAPI起動成功
+・Application startup complete.確認
+・main.pyの構文エラー修正
+・インデントエラー解消
+
+■ Git
+
+・Gitインストール完了
+・git init
+・初回コミット実施
+・.gitignore作成
+
+現在の状態
+
+HTML入力
+    ↓
+FastAPI
+    ↓
+review()受信
+    ↓
+.envからAPIキー取得
+    ↓
+（次回）Dify APIへ送信

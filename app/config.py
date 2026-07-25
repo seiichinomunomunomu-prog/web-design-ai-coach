@@ -1,0 +1,1 @@
+DIFY_API_KEY = "app-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"
