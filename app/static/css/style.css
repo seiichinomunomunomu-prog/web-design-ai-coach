@@ -14,20 +14,54 @@ img{
 	padding-bottom:20px;
 }
 button{
-	width:300px;          /* ƒ{ƒ^ƒ“‚Ì• */
-    	height:100px;          /* ƒ{ƒ^ƒ“‚Ì‚‚³ */
+	width:300px;          /* ï¿½{ï¿½^ï¿½ï¿½ï¿½Ì•ï¿½ */
+    	height:100px;          /* ï¿½{ï¿½^ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ */
 
-    	background-color: #0078D4;  /* ”wŒiF */
-    	color:white;               /* •¶šF */
+    	background-color: #0078D4;  /* ï¿½wï¿½iï¿½F */
+    	color:white;               /* ï¿½ï¿½ï¿½ï¿½ï¿½F */
 
-    	font-size: 24px;       /* •¶šƒTƒCƒY */
-    	font-weight: bold;     /* ‘¾š */
+    	font-size: 24px;       /* ï¿½ï¿½ï¿½ï¿½ï¿½Tï¿½Cï¿½Y */
+    	font-weight: bold;     /* ï¿½ï¿½ï¿½ï¿½ */
 
-    	border: none;          /* ˜gü‚È‚µ */
-    	border-radius: 8px;    /* Šp‚ğŠÛ‚­‚·‚é */
+    	border: none;          /* ï¿½gï¿½ï¿½ï¿½È‚ï¿½ */
+    	border-radius: 8px;    /* ï¿½pï¿½ï¿½ï¿½Û‚ï¿½ï¿½ï¿½ï¿½ï¿½ */
 }
 
 button:hover {
 	background:#1D4ED8;
 	transform: scale(1.03);
-}                                  
+}  
+
+.result {
+    margin-top: 40px;
+    padding: 20px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    background: #f8f8f8;
+}
+
+.answer pre {
+    background: #2d2d2d;
+    color: #ffffff;
+    padding: 15px;
+    overflow-x: auto;
+    border-radius: 6px;
+}
+
+.answer code {
+    font-family: Consolas, monospace;
+}
+
+.answer h1,
+.answer h2,
+.answer h3 {
+    color: #0078D4;
+}
+
+.answer p {
+    line-height: 1.8;
+}
+
+.answer li {
+    margin-bottom: 8px;
+}                                

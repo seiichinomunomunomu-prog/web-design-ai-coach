@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 
+import markdown
 import requests
 from dotenv import load_dotenv
 from fastapi import FastAPI, Form, Request
@@ -52,8 +53,9 @@ def home(request: Request):
     )
 
 
-@app.post("/review")
+@app.post("/review", response_class=HTMLResponse)
 def review(
+    request: Request,
     html_code: str = Form(...),
     css_code: str = Form(...),
     question: str = Form(...)
@@ -106,13 +108,27 @@ CSS
                 )
             }
 
-        return {
-            "answer": result.get(
-                "answer",
-                "回答を取得できませんでした。"
-            )
-        }
+        answer_markdown = result.get(
+            "answer",
+            "回答を取得できませんでした。"
+        )
 
+        answer_html = markdown.markdown(
+            answer_markdown,
+            extensions=["fenced_code", "tables"]
+        )
+
+        return templates.TemplateResponse(
+            request=request,
+            name="index.html",
+            context={
+                "answer_html": answer_html,
+                "html_code": html_code,
+                "css_code": css_code,
+                "question": question
+            }
+        )
+    
     except requests.exceptions.Timeout:
         return {
             "answer": (
