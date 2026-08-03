@@ -14,17 +14,17 @@ img{
 	padding-bottom:20px;
 }
 button{
-	width:300px;          /* �{�^���̕� */
-    	height:100px;          /* �{�^���̍��� */
+	width:300px;          /* $FFFD{$FFFD^$FFFD$FFFD$FFFD$0315$FFFD */
+    	height:100px;          /* $FFFD{$FFFD^$FFFD$FFFD$FFFD$030D$FFFD$FFFD$FFFD */
 
-    	background-color: #0078D4;  /* �w�i�F */
-    	color:white;               /* �����F */
+    	background-color: #0078D4;  /* $FFFDw$FFFDi$FFFDF */
+    	color:white;               /* $FFFD$FFFD$FFFD$FFFD$FFFDF */
 
-    	font-size: 24px;       /* �����T�C�Y */
-    	font-weight: bold;     /* ���� */
+    	font-size: 24px;       /* $FFFD$FFFD$FFFD$FFFD$FFFDT$FFFDC$FFFDY */
+    	font-weight: bold;     /* $FFFD$FFFD$FFFD$FFFD */
 
-    	border: none;          /* �g���Ȃ� */
-    	border-radius: 8px;    /* �p���ۂ����� */
+    	border: none;          /* $FFFDg$FFFD$FFFD$FFFD$0202$FFFD */
+    	border-radius: 8px;    /* $FFFDp$FFFD$FFFD$FFFD$06C2$FFFD$FFFD$FFFD$FFFD$FFFD */
 }
 
 button:hover {
@@ -64,4 +64,192 @@ button:hover {
 
 .answer li {
     margin-bottom: 8px;
-}                                
+} 
+/* =========================
+   AI添削結果エリア
+========================= */
+
+.result {
+    max-width: 900px;
+    margin-top: 40px;
+    padding: 24px;
+
+    background-color: #f7f9fc;
+    border: 1px solid #d9e2ec;
+    border-radius: 12px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.result h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+
+    padding-bottom: 12px;
+    border-bottom: 2px solid #0078d4;
+
+    color: #0078d4;
+    font-size: 28px;
+}
+
+.answer {
+    color: #222222;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.answer h1,
+.answer h2,
+.answer h3 {
+    margin-top: 28px;
+    margin-bottom: 12px;
+
+    color: #1f3c5b;
+}
+
+.answer p {
+    margin: 12px 0;
+}
+
+.answer ul,
+.answer ol {
+    padding-left: 28px;
+}
+
+.answer li {
+    margin-bottom: 8px;
+}
+
+.answer pre {
+    padding: 16px;
+    overflow-x: auto;
+
+    background-color: #1e1e1e;
+    border-radius: 8px;
+
+    color: #f5f5f5;
+    line-height: 1.6;
+}
+
+.answer code {
+    font-family: Consolas, "Courier New", monospace;
+}
+
+.answer :not(pre) > code {
+    padding: 2px 6px;
+
+    background-color: #e8eef5;
+    border-radius: 4px;
+
+    color: #c7254e;
+}
+/* =========================
+   画面全体のレイアウト
+========================= */
+
+body {
+    margin: 0;
+    padding: 40px 20px;
+
+    background-color: #f3f6f9;
+    color: #222222;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Hiragino Kaku Gothic ProN",
+        "Yu Gothic",
+        sans-serif;
+}
+
+body > h1,
+body > form,
+body > hr,
+body > .result {
+    width: 100%;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body > h1 {
+    margin-top: 0;
+    margin-bottom: 32px;
+
+    color: #1f3c5b;
+    font-size: 36px;
+    text-align: center;
+}
+
+form {
+    padding: 28px;
+
+    background-color: #ffffff;
+    border: 1px solid #d9e2ec;
+    border-radius: 12px;
+
+    box-sizing: border-box;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+form h3 {
+    margin-top: 24px;
+    margin-bottom: 10px;
+
+    color: #1f3c5b;
+}
+
+form h3:first-child {
+    margin-top: 0;
+}
+
+textarea,
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+
+    border: 1px solid #b8c4ce;
+    border-radius: 6px;
+
+    box-sizing: border-box;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 15px;
+}
+
+textarea:focus,
+input[type="text"]:focus {
+    border-color: #0078d4;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.15);
+}
+
+button[type="submit"] {
+    display: block;
+
+    width: 100%;
+    max-width: 320px;
+    height: 64px;
+    margin: 28px auto 0;
+
+    background-color: #0078d4;
+    border: none;
+    border-radius: 8px;
+
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #005a9e;
+}
+
+hr {
+    margin-top: 40px;
+    margin-bottom: 0;
+
+    border: none;
+}                              
