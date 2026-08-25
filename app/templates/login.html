@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB Design AI Coach - Login</title>
+    <link href="/static/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <h1>WEB Design AI Coach</h1>
+
+        <h2>ログイン</h2>
+
+        {% if error %}
+        <p class="login-error">
+            {{ error }}
+        </p>
+        {% endif %}
+
+        <form method="post" action="/login">
+
+            <label for="password">
+                パスワード
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                name="password"
+                required
+                autocomplete="current-password"
+            >
+
+            <button type="submit">
+                ログイン
+            </button>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>

@@ -5,10 +5,10 @@ import markdown
 import requests
 from dotenv import load_dotenv
 from fastapi import FastAPI, Form, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-
+from starlette.middleware.sessions import SessionMiddleware
 
 # main.pyが置かれているappフォルダ
 BASE_DIR = Path(__file__).resolve().parent
@@ -22,6 +22,9 @@ load_dotenv(
 
 # Dify APIキーを取得
 DIFY_API_KEY = os.getenv("DIFY_API_KEY")
+APP_PASSWORD = os.getenv("APP_PASSWORD")
+SESSION_SECRET = os.getenv("SESSION_SECRET")
+
 
 if not DIFY_API_KEY:
     raise RuntimeError(
@@ -29,8 +32,24 @@ if not DIFY_API_KEY:
         "appフォルダ内の.envを確認してください。"
     )
 
+if not APP_PASSWORD:
+    raise RuntimeError(
+        "APP_PASSWORDが読み込めません。"
+        "appフォルダ内の.envを確認してください。"
+    )
+
+if not SESSION_SECRET:
+    raise RuntimeError(
+        "SESSION_SECRETが読み込めません。"
+        "appフォルダ内の.envを確認してください。"
+    )
 
 app = FastAPI()
+
+app.add_middleware(
+    SessionMiddleware,
+    secret_key=SESSION_SECRET
+)
 
 # staticフォルダを公開
 app.mount(
@@ -44,9 +63,56 @@ templates = Jinja2Templates(
     directory=BASE_DIR / "templates"
 )
 
+@app.get("/login", response_class=HTMLResponse)
+def login_page(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="login.html",
+        context={
+            "error": None
+        }
+    )
+
+
+@app.post("/login")
+def login(
+    request: Request,
+    password: str = Form(...)
+):
+    if password == APP_PASSWORD:
+        request.session["authenticated"] = True
+
+        return RedirectResponse(
+            url="/",
+            status_code=303
+        )
+
+    return templates.TemplateResponse(
+        request=request,
+        name="login.html",
+        context={
+            "error": "パスワードが違います。"
+        }
+    )
+
+@app.get("/logout")
+def logout(request: Request):
+    request.session.clear()
+
+    return RedirectResponse(
+        url="/login",
+        status_code=303
+    )
 
 @app.get("/", response_class=HTMLResponse)
 def home(request: Request):
+
+    if not request.session.get("authenticated"):
+        return RedirectResponse(
+            url="/login",
+            status_code=303
+        )
+
     return templates.TemplateResponse(
         request=request,
         name="index.html"
@@ -61,6 +127,13 @@ def review(
     js_code: str = Form(""),
     question: str = Form(...)
 ):
+
+    if not request.session.get("authenticated"):
+        return RedirectResponse(
+            url="/login",
+            status_code=303
+        )
+
     url = "https://api.dify.ai/v1/chat-messages"
 
     headers = {
