@@ -410,3 +410,93 @@ PASS
 
 「作って終わり」ではなく、
 公開後に確認・修正・再テストすることもWebアプリ開発の一部である。
+
+## 2026-08-25 - Phase 7.1で学んだこと
+
+### 1. 公開することとアクセスを制限することは別
+
+RenderへDeployするとアプリはインターネットからアクセス可能になる。
+
+開発中のアプリやAPIコストが発生するアプリでは、
+公開後のアクセス制御も考える必要がある。
+
+### 2. 画面だけでなく処理側も保護する
+
+トップ画面 `/` だけをログイン必須にしても、
+`/review` が直接利用できればDify APIを呼び出される可能性がある。
+
+そのため、
+
+- `/`
+- `/review`
+
+の両方で認証状態を確認する必要がある。
+
+### 3. Sessionの役割
+
+ログイン成功時にSessionへ認証済み状態を保存することで、
+ページを移動するたびにパスワードを入力する必要がなくなる。
+
+ログアウト時にはSessionを削除する。
+
+### 4. 秘密情報はソースコードへ書かない
+
+APIキーやパスワードなどは、
+
+ローカル：
+`.env`
+
+公開環境：
+Render Environment Variables
+
+で管理する。
+
+GitHubへ秘密情報をpushしないことが重要。
+
+### 5. 新しいライブラリを使ったらrequirements.txtも更新する
+
+SessionMiddlewareの利用時に、
+
+`ModuleNotFoundError: No module named 'itsdangerous'`
+
+が発生した。
+
+ローカルで
+
+`python -m pip install itsdangerous`
+
+を実行するだけでなく、
+Renderでも同じ環境を再現できるように
+`requirements.txt` へ追加する必要がある。
+
+### 6. Deploy失敗時は原因を切り分ける
+
+今回、GitHubへのpush後、
+Renderに `APP_PASSWORD` と `SESSION_SECRET` がまだ存在しない状態で
+最初のDeployが失敗した。
+
+環境変数を設定して再Deployすることで正常にLiveとなった。
+
+Deploy失敗そのものではなく、
+EventsやLogsから原因を確認することが重要。
+
+### 7. 公開環境テストでは新しいブラウザSessionを使う
+
+InPrivateウィンドウを利用することで、
+既存のログインSessionの影響を受けず、
+
+「初めてアクセスしたユーザー」
+
+として認証動作を確認できる。
+
+### 今回できるようになったこと
+
+- FastAPIへの簡易ログイン機能追加
+- Sessionを使った認証状態管理
+- ログアウト処理
+- URL単位でのアクセス制御
+- 環境変数によるパスワード管理
+- Python依存パッケージ管理
+- Render Environment Variables設定
+- Deploy失敗からの復旧
+- 公開環境での認証テスト

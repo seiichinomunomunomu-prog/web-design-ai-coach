@@ -568,3 +568,75 @@ Phase 8   Create Mode
           ├─ DB
           ├─ 利用回数管理
           └─ 決済・料金プラン
+
+          ## Phase 7.1：簡易パスワード認証
+
+### 目的
+
+Render上に公開したWEB Design AI Coachを、
+URLを知っている第三者が自由に利用できないようにする。
+
+将来的な有料化・ユーザー認証機能の前段階として、
+簡易的なパスワード認証を実装する。
+
+### 実装内容
+
+- FastAPIにSessionMiddlewareを導入
+- ログイン画面 `login.html` を追加
+- `/login` GETを追加
+- `/login` POSTを追加
+- 正しいパスワード入力時に認証済みSessionを保存
+- `/` を未認証ユーザーから保護
+- `/review` を未認証ユーザーから保護
+- `/logout` を追加
+- ログアウト時にSessionを削除
+- `APP_PASSWORD` を環境変数で管理
+- `SESSION_SECRET` を環境変数で管理
+- SessionMiddleware用に `itsdangerous` を追加
+- `requirements.txt` に `itsdangerous` を追加
+
+### セキュリティ方針
+
+以下の秘密情報はソースコードへ直接記述しない。
+
+- DIFY_API_KEY
+- APP_PASSWORD
+- SESSION_SECRET
+
+ローカル環境では `.env`、
+Render公開環境では Environment Variables で管理する。
+
+`.env` は `.gitignore` によりGit管理対象外とする。
+
+### ローカル動作確認
+
+以下を確認済み。
+
+- 未ログインで `/` にアクセスすると `/login` へ移動
+- 間違ったパスワードではログイン不可
+- 正しいパスワードでメイン画面へ移動
+- ログイン後もAI添削が正常動作
+- ログアウトでSession削除
+- ログアウト後に再度 `/` へアクセスすると `/login` へ移動
+
+### Render公開確認
+
+以下を確認済み。
+
+- GitHubへのpush成功
+- Render Auto Deploy実行
+- Render Environment Variablesに以下を設定
+  - DIFY_API_KEY
+  - APP_PASSWORD
+  - SESSION_SECRET
+- 初回Deploy失敗後、環境変数設定後の再DeployでLiveを確認
+- InPrivateブラウザから公開URLへアクセス
+- ログイン画面表示
+- 正しいパスワードでメイン画面表示
+- ログアウト後ログイン画面へ戻ることを確認
+
+### Phase 7.1 完了判定
+
+簡易パスワード認証のローカル・公開環境での動作確認完了。
+
+Phase 7.1 完了。

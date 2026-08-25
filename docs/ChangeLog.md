@@ -331,3 +331,39 @@ PASS
 
 「作って終わり」ではなく、
 公開後に確認・修正・再テストすることもWebアプリ開発の一部である。
+
+## 2026-08-25 - Phase 7.1 簡易パスワード認証
+
+### Added
+
+- `templates/login.html` を追加
+- FastAPI SessionMiddlewareを追加
+- `/login` GET/POSTを追加
+- `/logout` を追加
+- `APP_PASSWORD` 環境変数を追加
+- `SESSION_SECRET` 環境変数を追加
+- `itsdangerous` を依存パッケージとして追加
+
+### Changed
+
+- `/` に認証チェックを追加
+- `/review` に認証チェックを追加
+- `index.html` にログアウトリンクを追加
+- `requirements.txt` に `itsdangerous` を追加
+
+### Deployment
+
+- GitHub commit `a545917` をRenderへDeploy
+- Render Environment Variablesに認証用環境変数を設定
+- 再Deploy後 `Deploy live` を確認
+
+### Verification
+
+- 未認証アクセス → ログイン画面：OK
+- 誤パスワード拒否：OK
+- 正しいパスワードでログイン：OK
+- AI添削：OK
+- ログアウト：OK
+- InPrivateで公開環境認証：OK
+
+Phase 7.1 完了。
