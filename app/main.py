@@ -56,8 +56,8 @@ def home(request: Request):
 @app.post("/review")
 def review(
     request: Request,
-    html_code: str = Form(...),
-    css_code: str = Form(...),
+    html_code: str = Form(""),
+    css_code: str = Form(""),
     js_code: str = Form(""),
     question: str = Form(...)
 ):
