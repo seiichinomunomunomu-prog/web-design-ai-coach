@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Sample Page</title>
+</head>
+<body>
+
+<h1 id="title">WEB Design AI Coach</h1>
+
+<p>ボタンを押してください。</p>
+
+<button id="btn">クリック</button>
+
+<p id="message"></p>
+
+const button = document.getElementById("btn");
+const message = document.getElementById("message");
+
+button.addEventListener("click", function(){
+
+message.innerHTML="こんにちは！";
+
+});
+</body>
+</html>

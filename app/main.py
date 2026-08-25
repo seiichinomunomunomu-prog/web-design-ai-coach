@@ -53,11 +53,12 @@ def home(request: Request):
     )
 
 
-@app.post("/review", response_class=HTMLResponse)
+@app.post("/review")
 def review(
     request: Request,
     html_code: str = Form(...),
     css_code: str = Form(...),
+    js_code: str = Form(""),
     question: str = Form(...)
 ):
     url = "https://api.dify.ai/v1/chat-messages"
@@ -79,6 +80,9 @@ HTML
 CSS
 {css_code}
 
+JavaScript
+{js_code}
+
 質問
 {question}
 """,
@@ -95,8 +99,8 @@ CSS
         )
 
         # 通信トラブルの調査時だけ、先頭の「#」を外す
-        # print("DIFY STATUS:", response.status_code)
-        # print("DIFY RESPONSE:", response.text)
+        print("DIFY STATUS:", response.status_code)
+        print("DIFY RESPONSE:", response.text)
 
         result = response.json()
 
@@ -125,6 +129,7 @@ CSS
                 "answer_html": answer_html,
                 "html_code": html_code,
                 "css_code": css_code,
+                "js_code": js_code,
                 "question": question
             }
         )
