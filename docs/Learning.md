@@ -301,3 +301,112 @@ v1.2
 のようにVersion管理する。
 
 これにより、TEST00〜06を使った回帰テストが可能になる。
+
+## 2026-08-25
+
+### GitHubとRenderを使ったWebアプリ公開
+
+今回、ローカルPCで開発していたFastAPIアプリを
+GitHub経由でRenderへ公開した。
+
+基本的な流れ：
+
+VS Code
+↓
+Git
+↓
+GitHub
+↓
+Render
+↓
+公開Webアプリ
+
+GitHubへpushするとRenderが変更を検知し、
+Auto-Deployによって公開アプリへ変更が反映されることを確認した。
+
+### Gitの役割
+
+以下の基本操作を実際の開発で使用した。
+
+- `git status`
+- `git add`
+- `git commit`
+- `git push`
+- `git remote -v`
+
+`git status` を使うことで、
+変更済み・ステージ済み・未追跡ファイルを確認できる。
+
+### .gitignoreの役割
+
+`.gitignore` はGitHubへ公開したくないファイルを
+Gitの管理対象から除外するために使用する。
+
+今回、
+
+- `.venv`
+- `.env`
+- `__pycache__`
+
+などをGitHubへ登録しない構成を確認した。
+
+特にAPIキーを含む `.env` をGitHubへpushしないことが重要。
+
+### 環境変数によるAPIキー管理
+
+ローカル環境では `.env`、
+Renderでは Environment Variables を使用する。
+
+Python側では、
+
+`os.getenv("DIFY_API_KEY")`
+
+によって環境に応じたAPIキーを取得できる。
+
+コードにAPIキーを直接記述しない構成にすることで、
+GitHub公開時の秘密情報流出を防止できる。
+
+### requirements.txtの役割
+
+RenderにはローカルPCの `.venv` をアップロードしない。
+
+代わりに `requirements.txt` に必要なPythonパッケージを記載し、
+Renderが公開環境で必要なパッケージをインストールする。
+
+### HTTPステータスの確認
+
+Renderログから以下を確認した。
+
+- `200 OK`：正常処理
+- `304 Not Modified`：ブラウザキャッシュを利用しており正常
+
+`POST /review 200 OK` により、
+公開環境のFastAPIがレビュー処理を正常に実行していることを確認できる。
+
+### 公開後テストの重要性
+
+ローカル環境で正常でも、
+公開環境で初めて見つかる問題がある。
+
+今回、
+
+CSS空欄
+↓
+`Field required`
+↓
+原因調査
+↓
+FastAPI修正
+↓
+Git commit / push
+↓
+Render Auto-Deploy
+↓
+再テスト
+↓
+PASS
+
+という一連の修正サイクルを経験した。
+
+「作って終わり」ではなく、
+公開後に確認・修正・再テストすることもWebアプリ開発の一部である。

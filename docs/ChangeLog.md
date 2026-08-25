@@ -159,3 +159,175 @@ Phase 6のSystem Prompt改善を完了。
 
 次フェーズではReview Mode v1.0を基準として、
 Render公開を含む実用化へ進む。
+
+## 2026-08-25
+
+### Phase 7：Render公開・公開後確認
+
+#### Renderへのデプロイ
+
+- GitHubに `web-design-ai-coach` リポジトリを作成
+- ローカルGitリポジトリとGitHubを接続
+- `master` ブランチをGitHubへpush
+- RenderとGitHubリポジトリを接続
+- Root Directoryを `app` に設定
+- Build Commandを設定
+- Start Commandを設定
+- Render Environment Variablesに `DIFY_API_KEY` を設定
+- Web Design AI CoachをRenderへ公開
+- 公開URLから正常にアクセスできることを確認
+
+#### APIキー管理改善
+
+- `config.py` に残っていた旧形式のDify APIキーを削除
+- APIキーを `.env` / Render Environment Variablesで管理する構成に統一
+- `.env` が `.gitignore` によりGitHubへ登録されないことを確認
+
+#### 部分入力レビュー対応
+
+公開環境でCSSを空欄にしてレビューした際、
+FastAPIで `Field required` が発生する問題を確認。
+
+原因：
+
+- `html_code`
+- `css_code`
+
+が `Form(...)` により必須入力になっていた。
+
+対応：
+
+- HTML / CSS / JavaScriptを `Form("")` に変更
+- 各コードを任意入力可能に変更
+
+GitHubへpush後、Render Auto-Deployで自動反映。
+同条件で再テストし正常動作を確認。
+
+#### 公開後動作確認
+
+- 公開URLアクセス：PASS
+- AI添削：PASS
+- HTMLのみの部分入力レビュー：PASS
+- Firefox：PASS
+- Chrome：PASS
+- スマートフォン Safari：PASS
+- Render `GET /`：200 OK
+- Render `POST /review`：200 OK
+- Dify API：200 OK
+- GitHub → Render Auto-Deploy：正常動作
+
+#### 残課題
+
+- 全コード未入力時のFastAPI側入力チェック
+- `DIFY RESPONSE` 全文ログ出力の停止
+- Render Free環境のスリープ復帰確認
+- 必要に応じたスマートフォンUI改善
+
+## 2026-08-25
+
+### GitHubとRenderを使ったWebアプリ公開
+
+今回、ローカルPCで開発していたFastAPIアプリを
+GitHub経由でRenderへ公開した。
+
+基本的な流れ：
+
+VS Code
+↓
+Git
+↓
+GitHub
+↓
+Render
+↓
+公開Webアプリ
+
+GitHubへpushするとRenderが変更を検知し、
+Auto-Deployによって公開アプリへ変更が反映されることを確認した。
+
+### Gitの役割
+
+以下の基本操作を実際の開発で使用した。
+
+- `git status`
+- `git add`
+- `git commit`
+- `git push`
+- `git remote -v`
+
+`git status` を使うことで、
+変更済み・ステージ済み・未追跡ファイルを確認できる。
+
+### .gitignoreの役割
+
+`.gitignore` はGitHubへ公開したくないファイルを
+Gitの管理対象から除外するために使用する。
+
+今回、
+
+- `.venv`
+- `.env`
+- `__pycache__`
+
+などをGitHubへ登録しない構成を確認した。
+
+特にAPIキーを含む `.env` をGitHubへpushしないことが重要。
+
+### 環境変数によるAPIキー管理
+
+ローカル環境では `.env`、
+Renderでは Environment Variables を使用する。
+
+Python側では、
+
+`os.getenv("DIFY_API_KEY")`
+
+によって環境に応じたAPIキーを取得できる。
+
+コードにAPIキーを直接記述しない構成にすることで、
+GitHub公開時の秘密情報流出を防止できる。
+
+### requirements.txtの役割
+
+RenderにはローカルPCの `.venv` をアップロードしない。
+
+代わりに `requirements.txt` に必要なPythonパッケージを記載し、
+Renderが公開環境で必要なパッケージをインストールする。
+
+### HTTPステータスの確認
+
+Renderログから以下を確認した。
+
+- `200 OK`：正常処理
+- `304 Not Modified`：ブラウザキャッシュを利用しており正常
+
+`POST /review 200 OK` により、
+公開環境のFastAPIがレビュー処理を正常に実行していることを確認できる。
+
+### 公開後テストの重要性
+
+ローカル環境で正常でも、
+公開環境で初めて見つかる問題がある。
+
+今回、
+
+CSS空欄
+↓
+`Field required`
+↓
+原因調査
+↓
+FastAPI修正
+↓
+Git commit / push
+↓
+Render Auto-Deploy
+↓
+再テスト
+↓
+PASS
+
+という一連の修正サイクルを経験した。
+
+「作って終わり」ではなく、
+公開後に確認・修正・再テストすることもWebアプリ開発の一部である。

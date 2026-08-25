@@ -342,3 +342,212 @@ Review Modeの実用化後、
 **Create Mode（構想 → HTML / CSS / JavaScript生成）**
 
 の開発へ進む。
+
+### 公開後確認③：全コード未入力時の挙動
+
+#### 実施内容
+
+HTML・CSS・JavaScriptをすべて空欄にし、
+質問欄のみ入力してAI添削を実行した。
+
+#### 結果
+
+Dify APIまで正常にリクエストされ、
+AIから
+
+「コードが提示されていないためレビューできない」
+
+という適切な回答が返った。
+
+#### 判定
+
+**機能上はPASS。ただし改善対象あり。**
+
+#### 改善課題
+
+コードがすべて未入力の場合は、
+Dify APIを呼び出す前にFastAPI側で入力チェックを行い、
+
+「レビューするコードを入力してください」
+
+と画面に表示する方が望ましい。
+
+これにより、
+
+- 不要なAPI呼び出しを削減
+- 応答時間を短縮
+- ユーザーにより直接的な案内を表示
+
+できる。
+
+#### 対応方針
+
+公開後確認を一巡した後、
+Phase 7の改善項目としてまとめて対応する。
+
+### 公開後確認④：別ブラウザ・別端末
+
+#### 結果
+
+以下の環境から公開URLへのアクセスを確認。
+
+- Firefox：OK
+- Chrome：OK
+- スマートフォン Safari：OK
+
+#### 判定
+
+**PASS**
+
+複数ブラウザ・別端末から公開Webアプリへ正常にアクセスできることを確認した。
+
+### 公開後確認⑤：Render Free環境のスリープ復帰
+
+#### 状態
+
+未確認（保留）
+
+#### 確認方法
+
+一定時間アクセスしない状態を作り、
+その後公開URLへアクセスする。
+
+#### 確認ポイント
+
+- 初回表示に通常より時間がかかるか
+- 待機後に正常表示されるか
+- AI添削が正常に実行できるか
+
+Freeプランの仕様による起動遅延と、
+アプリ障害を混同しないこと。
+
+### 公開後確認⑥：Renderログ確認
+
+#### 確認結果
+
+- GET / → 200 OK
+- POST /review → 200 OK
+- style.css → 304 Not Modified（正常なキャッシュ動作）
+- DIFY STATUS → 200
+- Render上のFastAPIからDify APIへの接続成功
+- WebアプリからAI添削まで正常動作
+
+#### 判定
+
+**PASS**
+
+#### 改善課題
+
+現在デバッグ目的で
+`DIFY RESPONSE` の内容をRenderログへ出力している。
+
+正式運用前に、回答全文をログへ出力する
+`print("DIFY RESPONSE:", response.text)`
+を削除または無効化する。
+
+## Phase 7 公開後確認⑦：Review Mode v1.0 公開版 最終判定
+
+### 総合結果
+
+RenderへReview Mode v1.0をデプロイし、
+公開環境で動作確認を実施した。
+
+### 確認済み
+
+- 公開URLから正常アクセス
+- HTML / CSS / JavaScript入力画面の表示
+- Dify APIとの接続
+- AI添削結果の正常表示
+- RAGを利用したレビュー
+- 部分入力レビュー
+- GitHub push → Render Auto-Deploy
+- Firefox / Chrome / Safariからのアクセス
+- Renderログ上でGET / POST /review 200 OK確認
+- DIFY STATUS 200確認
+
+### 公開後に発見・修正した問題
+
+HTMLまたはCSSを空欄にすると
+FastAPIのForm必須チェックにより
+`Field required` が発生した。
+
+対応：
+
+`Form(...)`
+
+から
+
+`Form("")`
+
+へ変更し、
+HTML / CSS / JavaScriptを個別に任意入力可能とした。
+
+GitHubへpush後、
+Render Auto-Deployで自動反映され、
+再テストで正常動作を確認した。
+
+### 残課題
+
+- 全コード未入力時のFastAPI側入力チェック
+- DIFY RESPONSE全文のログ出力停止
+- Render Free環境のスリープ復帰確認
+- 必要に応じたスマートフォンUI改善
+
+### 最終判定
+
+**Review Mode v1.0 公開版：合格**
+
+主要機能は本番環境で正常動作しており、
+第三者がブラウザから利用できる状態になった。
+
+残課題はv1.0公開を妨げる重大問題ではなく、
+今後の改善項目として管理する。
+
+## Phase 7：Render公開・公開後確認
+
+### Status
+
+**COMPLETED - Review Mode v1.0 公開版**
+
+### 完了内容
+
+- GitHubリポジトリ作成
+- ローカルGitとの接続
+- GitHubへのpush
+- Render Web Service作成
+- GitHub / Render連携
+- DIFY_API_KEYのEnvironment Variables設定
+- FastAPIアプリ公開
+- 公開URL動作確認
+- AI添削動作確認
+- 部分入力レビュー確認
+- 公開後不具合修正
+- Render Auto-Deploy確認
+- Firefox / Chrome / Safari確認
+- Renderログ確認
+- Dify API接続確認
+
+### 公開版
+
+Review Mode v1.0
+
+### 最終判定
+
+**PASS**
+
+主要機能はRender本番環境で正常動作しており、
+インターネット経由で利用できる状態になった。
+
+### 継続課題
+
+- [ ] 全コード未入力時のFastAPI側バリデーション
+- [ ] DIFY RESPONSE全文ログ出力停止
+- [ ] Render Freeスリープ復帰確認
+- [ ] スマートフォンUIの必要に応じた改善
+
+### 次Phase
+
+Phase 8へ進む。
+
+Phase 7で公開基盤が完成したため、
+今後はReview Mode v1.0を基準として機能改善・拡張を進める。
