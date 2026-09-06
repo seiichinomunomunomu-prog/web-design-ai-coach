@@ -640,3 +640,132 @@ Render公開環境では Environment Variables で管理する。
 簡易パスワード認証のローカル・公開環境での動作確認完了。
 
 Phase 7.1 完了。
+
+## Phase 8：Review Mode v1.1 機能改善・拡張
+
+### 目的
+
+Review Mode v1.0を基準として、
+実際の使用・テストから見つかった課題を改善し、
+より実用的なWeb Design AI Coachへ拡張する。
+
+---
+
+### Step 1：Focused Review 要件定義
+- [x] General Review / Focused Reviewの役割を定義
+- [x] Focused Reviewの回答方針を定義
+- [x] 最小変更の原則を定義
+- [x] Focused ReviewでもCrossCheckを維持する方針を定義
+- [x] `FocusedReview_Spec.md` に記録
+
+### Step 2：テストケース作成
+- [x] TEST-F01：画像＋テキストを横並び
+- [x] TEST-F02：ボタン中央配置・必要部分のみ
+- [x] TEST-F03：PC3列・スマホ1列
+- [x] TEST-F04：JavaScript ID不一致 / CrossCheck
+- [x] TEST-F05：General Review境界テスト
+
+### Step 3：Review Mode v1.0 Beforeテスト
+- [x] TEST-F01
+- [x] TEST-F02
+- [x] TEST-F03
+- [x] TEST-F04
+- [x] TEST-F05
+
+### Step 4：Beforeテスト評価
+
+| TEST | 内容 | Before |
+|---|---|---|
+| F01 | 画像＋テキストを横並び | △ |
+| F02 | ボタン中央配置・必要部分のみ | × |
+| F03 | PC3列・スマホ1列 | × |
+| F04 | JavaScript ID不一致 | △ |
+| F05 | General Review境界 | ○ |
+
+確認結果：
+- 技術的な回答内容は概ね正しい
+- HTML / CSS / JavaScriptのCrossCheck能力も正常
+- 具体的な質問でもGeneral Review形式になることが主な課題
+- 問題はコード解析能力ではなく回答形式の選択にあると判断
+
+### Step 5：System Prompt改善
+- [x] General / Focused ReviewのMode判定を追加
+- [x] Focused Review専用回答形式を追加
+- [x] 最小変更の原則を追加
+- [x] Focused Reviewでも関連範囲のCrossCheckを実施
+- [x] 重大問題の例外ルールを追加
+- [x] General / Focused回答形式の分離ルールを追加
+
+設計方針：
+- Review Mode v1.0のGeneral Review能力を極力変更しない
+- 既存機能への副作用を最小限にする
+- PromptだけでMode自動判定できるかを先に検証する
+
+### Step 6：Afterテスト
+- [x] TEST-F01 → PASS
+- [x] TEST-F02 → PASS
+- [x] TEST-F03 → PASS
+- [x] TEST-F04 → PASS
+- [x] TEST-F05 → PASS（軽微課題あり）
+
+| TEST | Before | After |
+|---|---:|---:|
+| F01 | △ | ○ |
+| F02 | × | ○ |
+| F03 | × | ○ |
+| F04 | △ | ○ |
+| F05 | ○ | ○ ※ |
+
+Mode判定：5 / 5 成功
+
+※ F05ではGeneral Reviewへの分類は正常。
+一部Focused Reviewでも使用する見出しが出力される場合があるが、
+回答内容・Mode判定には問題がないため現時点では許容する。
+
+追加のPrompt制約による副作用を避けるため、
+現状のSystem Promptを基準としてFIXする。
+
+---
+
+### Step 7：UI改善
+
+#### UI-01：AI添削中インジケーター
+- [ ] AI添削ボタン押下後に「AI添削中...」を表示
+- [ ] スピナー等のインジケーターを表示
+- [ ] 添削中は送信ボタンを無効化
+- [ ] 回答完了後に通常状態へ戻す
+
+目的：
+- AIが処理中であることを明確にする
+- 待ち時間のユーザー不安を軽減する
+- 二重送信を防止する
+
+#### UI-02：コードクリア機能
+- [ ] HTML / CSS / JavaScript入力欄を一括クリア
+- [ ] 質問欄は保持
+- [ ] AI添削ボタン付近にクリアボタンを配置
+
+目的：
+- 複数コードの連続レビューを行いやすくする
+- 手動でコードを削除する操作を減らす
+
+### Step 8：UI動作テスト
+- [ ] AI添削中表示確認
+- [ ] 二重送信防止確認
+- [ ] コードクリア確認
+- [ ] 質問欄保持確認
+- [ ] PCブラウザ確認
+- [ ] スマートフォン確認
+
+### Step 9：公開
+- [ ] ローカル最終確認
+- [ ] Git commit
+- [ ] GitHub push
+- [ ] Render Deploy
+- [ ] 公開環境確認
+
+### Step 10：Phase 8最終記録
+- [ ] ChangeLog.md更新
+- [ ] Learning.md更新
+- [ ] DevelopmentPlan.md完了更新
+- [ ] Review Mode v1.1として完了判定

@@ -367,3 +367,70 @@ PASS
 - InPrivateで公開環境認証：OK
 
 Phase 7.1 完了。
+
+## Review Mode v1.1 - Phase 8（開発中）
+
+### Focused Review機能追加
+
+Review Mode v1.0の利用・テストから、
+具体的な修正要求に対してもGeneral Review形式で
+回答する傾向があることを確認。
+
+ユーザーの質問内容に応じて、
+General Review / Focused Reviewを
+自動的に切り替える機能をSystem Promptに追加した。
+
+### 主な変更
+
+- General Review / Focused Reviewの自動判定を追加
+- Focused Review専用の回答形式を追加
+- 具体的な質問では修正コードを回答の中心とするよう改善
+- Focused Reviewでは無関係な全体レビューを抑制
+- 既存コードへの変更を最小限にするルールを追加
+- Focused Reviewでも関連範囲のCrossCheckを維持
+- 目的達成を妨げる重大問題はFocused Reviewでも指摘
+- General Review / Focused Reviewの回答形式分離ルールを追加
+
+### テスト
+
+TEST-F01～F05を作成し、
+System Prompt変更前後でBefore / Afterテストを実施。
+
+| TEST | 内容 | Before | After |
+|---|---|---:|---:|
+| F01 | 画像＋テキストを横並び | △ | ○ |
+| F02 | ボタン中央配置・必要部分のみ | × | ○ |
+| F03 | PC3列・スマホ1列 | × | ○ |
+| F04 | JavaScript ID不一致 / CrossCheck | △ | ○ |
+| F05 | General Review境界テスト | ○ | ○ ※ |
+
+Mode判定は5ケースすべて成功。
+
+F01～F04では、
+具体的な質問に対してFocused Reviewへ切り替わり、
+必要な変更箇所・修正コードを中心とした回答を確認。
+
+F04ではFocused Review化後も、
+HTML / JavaScript間のCrossCheck能力が
+維持されていることを確認。
+
+F05ではGeneral Reviewへの分類が正常に維持され、
+Focused Review追加によるMode判定上の回帰は確認されなかった。
+
+※ F05ではGeneral Review後半に、
+Focused Reviewでも使用する見出しが一部出力される場合がある。
+回答内容およびMode判定には問題がないため、
+現時点では既知の軽微課題として許容する。
+
+追加のPrompt制約による既存機能への副作用を避けるため、
+現状のSystem Promptを基準としてFIXする。
+
+### Phase 8 今後の予定
+
+- AI添削中インジケーターの追加
+- 添削中の二重送信防止
+- HTML / CSS / JavaScriptコードクリア機能の追加
+- UI動作テスト
+- ローカル最終確認
+- Render公開・公開後確認
+- Review Mode v1.1最終FIX

@@ -13,11 +13,12 @@
     <p>
         <a href="/logout">ログアウト</a>
     </p>
-    <form method="post" action="/review">
+    <form method="post" action="/review" id="reviewForm">
 
         <h3>HTMLコード</h3>
 
         <textarea
+            id="htmlCode"
             name="html_code"
             rows="10"
             cols="80"
@@ -29,8 +30,9 @@
         <h3>CSSコード</h3>
 
         <textarea
+            id="cssCode"
             name="css_code"
-            rows="10"
+            rows="10"x   
             cols="80"
             placeholder="CSSコードを入力してください"
         >{{ css_code | default("") }}</textarea>
@@ -39,6 +41,7 @@
         <h3>JavaScriptコード</h3>
 
         <textarea
+            id="jsCode"
             name="js_code"
             rows="10"
             cols="80"
@@ -58,8 +61,14 @@
 
         <br><br>
 
-        <button type="submit">AI添削ボタン</button>
+        <div class="review-action">
+            <button type="submit" id="reviewButton">AI添削ボタン</button>
+            <span id="loadingIndicator" class="loading-indicator"></span>
+            <button type="button" id="clearCodeButton">
+                コードをクリア
+            </button>
 
+        </div>
     </form>
 
     {% if answer_html %}
@@ -72,7 +81,33 @@
                 {{ answer_html | safe }}
             </div>
         </section>
-    {% endif %}
+        {% endif %}
+
+    <script>
+        const reviewForm = document.getElementById("reviewForm");
+        const reviewButton = document.getElementById("reviewButton");
+        const clearCodeButton = document.getElementById("clearCodeButton");
+
+        const htmlCode = document.getElementById("htmlCode");
+        const cssCode = document.getElementById("cssCode");
+        const jsCode = document.getElementById("jsCode");
+
+        const loadingIndicator = document.getElementById("loadingIndicator");
+
+        reviewForm.addEventListener("submit", () => {
+            reviewButton.disabled = true;
+            clearCodeButton.disabled = true;
+
+            reviewButton.textContent = "AI添削中...";
+            loadingIndicator.classList.add("is-active");
+        });
+
+        clearCodeButton.addEventListener("click", () => {
+            htmlCode.value = "";
+            cssCode.value = "";
+            jsCode.value = "";
+        });
+    </script>
 
 </body>
 </html>
