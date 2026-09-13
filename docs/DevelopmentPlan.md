@@ -730,10 +730,10 @@ Mode判定：5 / 5 成功
 ### Step 7：UI改善
 
 #### UI-01：AI添削中インジケーター
-- [ ] AI添削ボタン押下後に「AI添削中...」を表示
-- [ ] スピナー等のインジケーターを表示
-- [ ] 添削中は送信ボタンを無効化
-- [ ] 回答完了後に通常状態へ戻す
+- [ x] AI添削ボタン押下後に「AI添削中...」を表示
+- [ x] スピナー等のインジケーターを表示
+- [ x] 添削中は送信ボタンを無効化
+- [ x] 回答完了後に通常状態へ戻す
 
 目的：
 - AIが処理中であることを明確にする
@@ -741,31 +741,77 @@ Mode判定：5 / 5 成功
 - 二重送信を防止する
 
 #### UI-02：コードクリア機能
-- [ ] HTML / CSS / JavaScript入力欄を一括クリア
-- [ ] 質問欄は保持
-- [ ] AI添削ボタン付近にクリアボタンを配置
+- [ x] HTML / CSS / JavaScript入力欄を一括クリア
+- [ x] 質問欄は保持
+- [ x] AI添削ボタン付近にクリアボタンを配置
 
 目的：
 - 複数コードの連続レビューを行いやすくする
 - 手動でコードを削除する操作を減らす
 
 ### Step 8：UI動作テスト
-- [ ] AI添削中表示確認
-- [ ] 二重送信防止確認
-- [ ] コードクリア確認
-- [ ] 質問欄保持確認
-- [ ] PCブラウザ確認
-- [ ] スマートフォン確認
+- [ x] AI添削中表示確認
+- [ x] 二重送信防止確認
+- [ x] コードクリア確認
+- [ x] 質問欄保持確認
+- [ x] PCブラウザ確認
+- [ x] スマートフォン確認
 
 ### Step 9：公開
-- [ ] ローカル最終確認
-- [ ] Git commit
-- [ ] GitHub push
-- [ ] Render Deploy
-- [ ] 公開環境確認
+- [ x] ローカル最終確認
+- [ x] Git commit
+- [ x] GitHub push
+- [ x] Render Deploy
+- [ x] 公開環境確認
 
 ### Step 10：Phase 8最終記録
-- [ ] ChangeLog.md更新
-- [ ] Learning.md更新
-- [ ] DevelopmentPlan.md完了更新
-- [ ] Review Mode v1.1として完了判定
+- [ x] ChangeLog.md更新
+- [ x] Learning.md更新
+- [ x] DevelopmentPlan.md完了更新
+- [x ] Review Mode v1.1として完了判定
+
+### Phase 8：Review Mode v1.1 機能改善・拡張
+
+#### Focused Review
+- [x] Focused Review 要件整理
+- [x] F01〜F05 固定テスト作成
+- [x] Beforeテスト実施
+- [x] System Prompt改善
+- [x] Afterテスト実施
+- [x] F01〜F05 モード選択 5/5 PASS
+- [x] 回帰確認
+
+#### UI改善
+- [x] UI-01 AI添削中インジケーター
+- [x] AI添削中の二重送信防止
+- [x] AI添削中のコードクリア操作無効化
+- [x] UI-02 HTML / CSS / JavaScript コードクリア
+- [x] 質問欄保持
+- [x] UI-01 / UI-02 動作テスト PASS
+
+#### 公開
+- [x] ローカル最終確認 PASS
+- [x] Git commit / GitHub push
+- [x] Render Auto-Deploy
+- [x] 公開環境確認 PASS
+
+**Phase 8：完了**
+
+## Phase 9：Create Mode v0.1
+
+### Step 1：要件定義
+
+- [x] Create Modeの目的を定義
+- [x] Review Modeとの役割分担を定義
+- [x] Review / Createを別画面とする方針を決定
+- [x] HTML / CSS / JavaScript生成を定義
+- [x] 各コードの個別コピー機能を定義
+- [x] プレビュー機能を定義
+- [x] v0.1ではコード直接編集を対象外とする
+- [x] Review Mode回帰確認を完成条件に設定
+- [x] Create Mode v0.1完成条件を確定
+
+詳細仕様：
+`docs/CreateMode_Spec.md`
+
+**Step 1：完了**

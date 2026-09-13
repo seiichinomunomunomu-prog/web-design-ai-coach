@@ -1,0 +1,386 @@
+/* 基本設定 */
+:root {
+  --main-color: #5d4435;
+  --accent-color: #b8784e;
+  --light-color: #f7f2eb;
+  --white-color: #ffffff;
+  --text-color: #3d352f;
+  --sub-text-color: #71665e;
+  --border-color: #ded5cb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--text-color);
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  line-height: 1.8;
+  background-color: var(--white-color);
+}
+
+img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ヘッダー・ナビゲーション */
+.site-header {
+  position: relative;
+  z-index: 10;
+  background-color: var(--white-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(1100px, 90%);
+  min-height: 76px;
+  margin: 0 auto;
+  gap: 32px;
+}
+
+.site-logo,
+.footer-logo {
+  color: var(--main-color);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.55rem;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-list a {
+  display: inline-block;
+  padding: 8px 0;
+  font-size: 0.92rem;
+  font-weight: bold;
+}
+
+.nav-list a:hover,
+.nav-list a:focus-visible {
+  color: var(--accent-color);
+}
+
+/* メインビジュアル */
+.hero {
+  position: relative;
+  display: grid;
+  min-height: 620px;
+  overflow: hidden;
+  place-items: center;
+}
+
+.hero-image,
+.hero-overlay,
+.hero-content {
+  grid-area: 1 / 1;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  min-height: 620px;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(40, 28, 21, 0.7), rgba(40, 28, 21, 0.2));
+}
+
+.hero-content {
+  position: relative;
+  width: min(1100px, 90%);
+  color: var(--white-color);
+}
+
+.hero-content h1 {
+  max-width: 750px;
+  margin: 8px 0 16px;
+  font-family: Georgia, "Yu Mincho", serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.35;
+  letter-spacing: 0.05em;
+}
+
+.hero-content p {
+  max-width: 650px;
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.hero-content .hero-subtitle {
+  color: #f0d1b4;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.95rem;
+  font-weight: bold;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* 共通セクション */
+.section {
+  padding: 96px 0;
+  scroll-margin-top: 20px;
+}
+
+.section-inner {
+  width: min(1100px, 90%);
+  margin: 0 auto;
+}
+
+.narrow-content {
+  max-width: 800px;
+  text-align: center;
+}
+
+.section-label {
+  margin: 0 0 6px;
+  color: var(--accent-color);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.16em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.section-title {
+  margin: 0 0 44px;
+  color: var(--main-color);
+  font-family: Georgia, "Yu Mincho", serif;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  line-height: 1.4;
+  text-align: center;
+}
+
+.section-title::after {
+  display: block;
+  width: 44px;
+  height: 2px;
+  margin: 14px auto 0;
+  background-color: var(--accent-color);
+  content: "";
+}
+
+.about-text {
+  margin: 0;
+  color: var(--sub-text-color);
+  line-height: 2.2;
+}
+
+/* おすすめメニュー */
+.menu-section {
+  background-color: var(--light-color);
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.menu-card {
+  overflow: hidden;
+  background-color: var(--white-color);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(68, 49, 38, 0.08);
+}
+
+.menu-image {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.menu-card-content {
+  padding: 24px;
+}
+
+.menu-card h3 {
+  margin: 0 0 10px;
+  color: var(--main-color);
+  font-family: Georgia, "Yu Mincho", serif;
+  font-size: 1.25rem;
+}
+
+.menu-card p {
+  margin: 0;
+  color: var(--sub-text-color);
+  font-size: 0.92rem;
+}
+
+.menu-card .menu-price {
+  margin-top: 14px;
+  color: var(--accent-color);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+/* 店舗情報 */
+.shop-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  align-items: start;
+  gap: 80px;
+}
+
+.shop-heading .section-label,
+.section-title.align-left {
+  text-align: left;
+}
+
+.section-title.align-left {
+  margin-bottom: 28px;
+}
+
+.section-title.align-left::after {
+  margin-left: 0;
+}
+
+.shop-heading > p:last-child {
+  margin: 0;
+  color: var(--sub-text-color);
+}
+
+.shop-details {
+  margin: 0;
+  border-top: 1px solid var(--border-color);
+}
+
+.shop-detail-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.shop-detail-row dt {
+  color: var(--main-color);
+  font-weight: bold;
+}
+
+.shop-detail-row dd {
+  margin: 0;
+}
+
+.shop-detail-row a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* フッター */
+.site-footer {
+  padding: 44px 5%;
+  color: var(--white-color);
+  text-align: center;
+  background-color: var(--main-color);
+}
+
+.site-footer .footer-logo {
+  margin: 0 0 10px;
+  color: var(--white-color);
+}
+
+.site-footer p:last-child {
+  margin: 0;
+  color: #d9cdc4;
+}
+
+/* スマートフォン対応 */
+@media (max-width: 767px) {
+  .header-inner {
+    flex-direction: column;
+    min-height: auto;
+    padding: 16px 0 12px;
+    gap: 8px;
+  }
+
+  .nav-list {
+    justify-content: center;
+    gap: 18px;
+  }
+
+  .nav-list a {
+    font-size: 0.78rem;
+  }
+
+  .hero,
+  .hero-image {
+    min-height: 500px;
+  }
+
+  .hero-overlay {
+    background-color: rgba(40, 28, 21, 0.5);
+    background-image: none;
+  }
+
+  .hero-content {
+    text-align: center;
+  }
+
+  .hero-content h1 {
+    font-size: 2.15rem;
+  }
+
+  .hero-content p {
+    font-size: 0.95rem;
+  }
+
+  .section {
+    padding: 68px 0;
+  }
+
+  .section-title {
+    margin-bottom: 32px;
+  }
+
+  .menu-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .shop-layout {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .shop-detail-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 420px) {
+  .nav-list {
+    gap: 12px;
+  }
+
+  .nav-list a {
+    font-size: 0.72rem;
+  }
+}

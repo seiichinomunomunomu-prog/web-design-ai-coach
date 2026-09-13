@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="心地よい時間と、あなたらしい美しさを提供する美容室 LUMIERE SALON の紹介ページです。">
+  <title>LUMIERE SALON | 美容室</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-logo" href="#top" aria-label="LUMIERE SALON トップへ">
+        <span class="logo-main">LUMIERE</span>
+        <span class="logo-sub">HAIR SALON</span>
+      </a>
+
+      <button class="menu-button" type="button" aria-label="メニューを開く" aria-controls="global-navigation" aria-expanded="false">
+        <span class="menu-button-line"></span>
+        <span class="menu-button-line"></span>
+        <span class="menu-button-line"></span>
+      </button>
+
+      <nav class="global-navigation" id="global-navigation" aria-label="メインナビゲーション">
+        <ul class="navigation-list">
+          <li><a href="#about">サロン紹介</a></li>
+          <li><a href="#menu">メニュー</a></li>
+          <li><a href="#stylists">スタイリスト</a></li>
+          <li><a href="#access">店舗情報</a></li>
+          <li><a class="navigation-reserve" href="#contact">ご予約</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-label="メインビジュアル">
+      <img class="hero-image" src="images/hero.jpg" alt="明るく落ち着いた美容室の店内">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="hero-lead">Your beauty, your story.</p>
+        <h1>毎日に、<br>あなたらしい輝きを。</h1>
+        <p class="hero-description">髪と心に寄り添い、本来の美しさを引き出すヘアサロン。</p>
+        <a class="primary-button" href="#contact">ご予約はこちら</a>
+      </div>
+    </section>
+
+    <section class="section about-section" id="about">
+      <div class="section-inner narrow-inner">
+        <div class="section-heading">
+          <p class="section-heading-en">ABOUT US</p>
+          <h2>心までほどける、特別な時間</h2>
+        </div>
+        <p class="about-text">
+          LUMIERE SALONは、お客様一人ひとりの個性とライフスタイルを大切にする美容室です。丁寧なカウンセリングと確かな技術で、ご自宅でも扱いやすく、毎日が少し楽しくなるスタイルをご提案します。
+        </p>
+        <div class="about-points">
+          <article class="about-point">
+            <span class="point-number">01</span>
+            <h3>丁寧なカウンセリング</h3>
+            <p>髪のお悩みや理想のイメージをじっくりお伺いします。</p>
+          </article>
+          <article class="about-point">
+            <span class="point-number">02</span>
+            <h3>髪にやさしい施術</h3>
+            <p>髪と頭皮への負担に配慮した薬剤を使用しています。</p>
+          </article>
+          <article class="about-point">
+            <span class="point-number">03</span>
+            <h3>くつろぎの空間</h3>
+            <p>落ち着いた店内で、ゆっくりとお過ごしいただけます。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section menu-section" id="menu">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="section-heading-en">MENU</p>
+          <h2>施術メニュー</h2>
+          <p>髪の状態やご希望に合わせて、最適なメニューをご提案します。</p>
+        </div>
+
+        <div class="menu-grid">
+          <article class="menu-card">
+            <h3>Cut</h3>
+            <dl class="price-list">
+              <div><dt>カット</dt><dd>\5,500</dd></div>
+              <div><dt>前髪カット</dt><dd>\1,650</dd></div>
+              <div><dt>キッズカット</dt><dd>\3,300</dd></div>
+            </dl>
+          </article>
+
+          <article class="menu-card">
+            <h3>Color</h3>
+            <dl class="price-list">
+              <div><dt>カラー</dt><dd>\7,700?</dd></div>
+              <div><dt>リタッチカラー</dt><dd>\6,600?</dd></div>
+              <div><dt>ハイライト</dt><dd>\4,400?</dd></div>
+            </dl>
+          </article>
+
+          <article class="menu-card">
+            <h3>Perm & Care</h3>
+            <dl class="price-list">
+              <div><dt>パーマ</dt><dd>\8,800?</dd></div>
+              <div><dt>縮毛矯正</dt><dd>\14,300?</dd></div>
+              <div><dt>トリートメント</dt><dd>\3,300?</dd></div>
+            </dl>
+          </article>
+        </div>
+        <p class="menu-note">※ 料金はすべて税込です。髪の長さや施術内容により料金が異なる場合があります。</p>
+      </div>
+    </section>
+
+    <section class="section stylist-section" id="stylists">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="section-heading-en">STYLISTS</p>
+          <h2>スタイリスト紹介</h2>
+        </div>
+
+        <div class="stylist-grid">
+          <article class="stylist-card">
+            <img src="images/stylist01.jpg" alt="スタイリスト 山田美咲のプロフィール写真">
+            <div class="stylist-content">
+              <p class="stylist-role">OWNER / STYLIST</p>
+              <h3>山田 美咲</h3>
+              <p>ナチュラルで扱いやすいスタイルが得意です。毎日のお手入れまで丁寧にお伝えします。</p>
+            </div>
+          </article>
+
+          <article class="stylist-card">
+            <img src="images/stylist02.jpg" alt="スタイリスト 佐藤蓮のプロフィール写真">
+            <div class="stylist-content">
+              <p class="stylist-role">STYLIST</p>
+              <h3>佐藤 蓮</h3>
+              <p>透明感のあるカラーやトレンドを取り入れたスタイルを、お客様に合わせてご提案します。</p>
+            </div>
+          </article>
+
+          <article class="stylist-card">
+            <img src="images/stylist03.jpg" alt="スタイリスト 鈴木彩のプロフィール写真">
+            <div class="stylist-content">
+              <p class="stylist-role">STYLIST</p>
+              <h3>鈴木 彩</h3>
+              <p>ショートヘアとヘッドスパが得意です。リラックスできる時間をご提供します。</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section access-section" id="access">
+      <div class="section-inner access-inner">
+        <div class="section-heading access-heading">
+          <p class="section-heading-en">INFORMATION</p>
+          <h2>店舗情報</h2>
+        </div>
+
+        <div class="information-box">
+          <dl class="information-list">
+            <div>
+              <dt>店舗名</dt>
+              <dd>LUMIERE SALON</dd>
+            </div>
+            <div>
+              <dt>住所</dt>
+              <dd>〒000-0000 東京都○○区○○ 1-2-3</dd>
+            </div>
+            <div>
+              <dt>営業時間</dt>
+              <dd>10:00?19:00</dd>
+            </div>
+            <div>
+              <dt>定休日</dt>
+              <dd>毎週火曜日、第1・第3月曜日</dd>
+            </div>
+            <div>
+              <dt>電話番号</dt>
+              <dd><a href="tel:0000000000">00-0000-0000</a></dd>
+            </div>
+            <div>
+              <dt>アクセス</dt>
+              <dd>○○駅から徒歩5分</dd>
+            </div>
+          </dl>
+          <div class="map-placeholder" aria-label="地図を設置する場所">
+            <span>MAP</span>
+            <p>ここに地図を設置できます</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+      <div class="section-inner contact-inner">
+        <p class="section-heading-en">RESERVATION</p>
+        <h2>ご予約・お問い合わせ</h2>
+        <p>ご予約はお電話にて承っております。お気軽にお問い合わせください。</p>
+        <a class="contact-phone" href="tel:0000000000">00-0000-0000</a>
+        <p class="contact-hours">受付時間 10:00?18:30</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="footer-logo" href="#top">LUMIERE</a>
+    <p>〒000-0000 東京都○○区○○ 1-2-3</p>
+    <small>&copy; 2025 LUMIERE SALON. All Rights Reserved.</small>
+  </footer>
+
+  <script src="style.js"></script>
+</body>
+</html>

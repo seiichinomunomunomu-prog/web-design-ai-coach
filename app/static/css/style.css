@@ -312,3 +312,28 @@ hr {
     opacity: 0.5;
     cursor: not-allowed;
 }
+.mode-switch {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.mode-switch-button {
+    display: inline-block;
+    padding: 10px 18px;
+    border: 1px solid #999;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #333333;
+    text-decoration: none;
+}
+
+.mode-switch-button:hover {
+    background-color: #f3f3f3;
+}
+
+.mode-switch-button.active {
+    background-color: #333333;
+    color: #ffffff;
+    border-color: #333333;
+}

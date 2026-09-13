@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="街角の小さなカフェ、Cafe Mellowの紹介ページです。">
+  <title>Cafe Mellow</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-logo" href="#top">Cafe Mellow</a>
+
+      <nav class="global-nav" aria-label="メインナビゲーション">
+        <ul class="nav-list">
+          <li><a href="#about">カフェ紹介</a></li>
+          <li><a href="#menu">おすすめメニュー</a></li>
+          <li><a href="#shop">店舗情報</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <img
+        class="hero-image"
+        src="images/cafe-interior.jpg"
+        alt="落ち着いた雰囲気のカフェ店内"
+      >
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="hero-subtitle">Coffee, Food & Relax</p>
+        <h1 id="hero-title">日常に、やさしいひとときを。</h1>
+        <p>香り豊かなコーヒーと手作りメニューをお楽しみください。</p>
+      </div>
+    </section>
+
+    <section id="about" class="section about-section">
+      <div class="section-inner narrow-content">
+        <p class="section-label">About Us</p>
+        <h2 class="section-title">カフェ紹介</h2>
+        <p class="about-text">
+          Cafe Mellowは、街角にある小さなカフェです。
+          丁寧に淹れたコーヒーと、季節の食材を使った手作りメニューをご用意しています。
+          おひとりでも、ご家族やご友人と一緒でも、ゆっくりとお過ごしいただけます。
+        </p>
+      </div>
+    </section>
+
+    <section id="menu" class="section menu-section">
+      <div class="section-inner">
+        <p class="section-label">Our Favorites</p>
+        <h2 class="section-title">おすすめメニュー</h2>
+
+        <div class="menu-grid">
+          <article class="menu-card">
+            <img
+              class="menu-image"
+              src="images/blend-coffee.jpg"
+              alt="カップに入ったブレンドコーヒー"
+            >
+            <div class="menu-card-content">
+              <h3>オリジナルブレンド</h3>
+              <p>ほどよいコクとやさしい香りを楽しめる、当店自慢の一杯です。</p>
+              <p class="menu-price">\550</p>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <img
+              class="menu-image"
+              src="images/pancake.jpg"
+              alt="フルーツを添えたふんわりパンケーキ"
+            >
+            <div class="menu-card-content">
+              <h3>季節のパンケーキ</h3>
+              <p>ふんわり焼き上げた生地に、季節のフルーツを添えました。</p>
+              <p class="menu-price">\980</p>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <img
+              class="menu-image"
+              src="images/sandwich.jpg"
+              alt="野菜をたっぷり使ったサンドイッチ"
+            >
+            <div class="menu-card-content">
+              <h3>デリサンドプレート</h3>
+              <p>新鮮な野菜をたっぷり挟んだ、ランチにおすすめの一皿です。</p>
+              <p class="menu-price">\1,100</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="shop" class="section shop-section">
+      <div class="section-inner shop-layout">
+        <div class="shop-heading">
+          <p class="section-label">Shop Information</p>
+          <h2 class="section-title align-left">店舗情報</h2>
+          <p>お買い物やお散歩の途中に、気軽にお立ち寄りください。</p>
+        </div>
+
+        <dl class="shop-details">
+          <div class="shop-detail-row">
+            <dt>住所</dt>
+            <dd>〒123-4567 東京都○○区○○町1-2-3</dd>
+          </div>
+          <div class="shop-detail-row">
+            <dt>営業時間</dt>
+            <dd>9:00?18:00</dd>
+          </div>
+          <div class="shop-detail-row">
+            <dt>定休日</dt>
+            <dd>毎週水曜日</dd>
+          </div>
+          <div class="shop-detail-row">
+            <dt>電話番号</dt>
+            <dd><a href="tel:0312345678">03-1234-5678</a></dd>
+          </div>
+          <div class="shop-detail-row">
+            <dt>アクセス</dt>
+            <dd>○○駅から徒歩5分</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="footer-logo">Cafe Mellow</p>
+    <p><small>&copy; Cafe Mellow. All Rights Reserved.</small></p>
+  </footer>
+</body>
+</html>

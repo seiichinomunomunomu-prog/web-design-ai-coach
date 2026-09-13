@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="/static/css/style.css"> 
+    <title>Create Mode</title>
+    <style>
+        .preview-mode-button {
+            padding: 8px 16px;
+            border: 1px solid #999;
+            background-color: #ffffff;
+            cursor: pointer;
+        }
+
+        .preview-mode-button.active {
+            background-color: #333333;
+            color: #ffffff;
+        }
+        .create-spinner {
+            width: 14px;
+            height: 14px;
+            margin-right: 6px;
+            border: 2px solid currentColor;
+            border-right-color: transparent;
+            border-radius: 50%;
+            vertical-align: -2px;
+            animation: create-spin 0.8s linear infinite;
+            display: none;
+        }
+
+        .create-spinner.show {
+            display: inline-block;
+        }
+
+        @keyframes create-spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .create-spinner[hidden] {
+            display: none;
+        }
+        .code-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        }
+
+        .code-header h3 {
+            margin-bottom: 8px;
+        }
+        pre {
+            max-height: 360px;
+            overflow: auto;
+            padding: 16px;
+            border: 1px solid #dddddd;
+            border-radius: 6px;
+            background-color: #f7f7f7;
+            white-space: pre;
+        }
+        .no-javascript-message {
+            padding: 16px;
+            border: 1px solid #dddddd;
+            border-radius: 6px;
+            background-color: #f7f7f7;
+            color: #666666;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="mode-switch">
+        <a href="/" class="mode-switch-button">
+            Review Mode
+        </a>
+
+        <a href="/create" class="mode-switch-button active">
+            Create Mode
+        </a>
+    </nav>
+    <h1>Create Mode</h1>
+
+    <p>
+        作りたいWebページの内容を入力してください。
+    </p>
+
+    <form
+        method="post"
+        action="/create"
+        id="createForm"
+    >
+
+        <textarea
+            name="request_text"
+            rows="7"
+            placeholder="例：
+シンプルなカフェのホームページを作ってください。
+上部に店名とナビゲーションを配置し、
+おすすめメニューを3つ表示してください。
+スマートフォンにも対応してください。"
+            required
+>{{ request_text | default("") }}</textarea>
+
+        <br>
+
+       <button
+            type="submit"
+            id="createSubmitButton"
+        >
+            <span
+                id="createSpinner"
+                class="create-spinner"
+                
+            ></span>
+
+            <span id="createButtonText">
+                AIでWebページを作成
+            </span>
+        </button> 
+
+    </form>
+{% if error_message %}
+    <p class="create-error-message">
+        {{ error_message }}
+    </p>
+{% endif %}
+{% if generated_html %}
+
+    <hr>
+
+    <h2>生成結果</h2>
+<div class="code-header">
+    <h3>HTML</h3>
+
+    <button
+        type="button"
+        class="copy-button"
+        data-copy-target="generatedHtmlCode"
+    >
+        コピー
+    </button>
+</div>
+    <pre><code id="generatedHtmlCode">{{ generated_html }}</code></pre>
+
+<div class="code-header">
+    <h3>CSS</h3>
+
+    <button
+        type="button"
+        class="copy-button"
+        data-copy-target="generatedCssCode"
+    >
+        コピー
+    </button>
+</div>
+    <pre><code id="generatedCssCode">{{ generated_css }}</code></pre>
+
+
+    
+
+{% if generated_javascript %}
+
+    <div class="code-header">
+        <h3>JavaScript</h3>
+
+        <button
+            type="button"
+            class="copy-button"
+            data-copy-target="generatedJavascriptCode"
+        >
+            コピー
+        </button>
+    </div>
+
+    <pre class="generated-code"><code id="generatedJavascriptCode">{{ generated_javascript }}</code></pre>
+
+{% else %}
+
+    <div class="code-header">
+        <h3>JavaScript</h3>
+
+        <button
+            type="button"
+            class="copy-button"
+            disabled
+        >
+            コピー
+        </button>
+    </div>
+
+    <div class="no-javascript-message">
+        このページではJavaScriptを使用していません。
+    </div>
+
+{% endif %}
+
+    <h3>プレビュー</h3>
+
+    <div>
+        <button
+            type="button"
+            id="previewPcButton"
+            class="preview-mode-button active"
+        >
+            PC
+        </button>
+
+        <button
+            type="button"
+            id="previewSmartphoneButton"
+            class="preview-mode-button"
+        >
+            Smartphone
+        </button>
+    </div>
+
+    <div
+        id="previewWrapper"
+        style="
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 10px;
+        "
+    >
+        <iframe
+            id="previewFrame"
+            srcdoc="{{ preview_html | e }}"
+            sandbox="allow-scripts"
+            title="生成したWebページのプレビュー"
+            style="
+                display: block;
+                width: 100%;
+                height: 600px;
+                margin: 0 auto;
+                border: 1px solid #ccc;
+            "
+        ></iframe>
+    </div>
+
+<h3>説明</h3>
+<p>{{ generated_explanation }}</p>
+{% endif %}
+<script>
+    const previewPcButton =
+        document.getElementById("previewPcButton");
+
+    const previewSmartphoneButton =
+        document.getElementById("previewSmartphoneButton");
+
+    const previewFrame =
+        document.getElementById("previewFrame");
+
+    if (
+        previewPcButton &&
+        previewSmartphoneButton &&
+        previewFrame
+    ) {
+    previewPcButton.addEventListener("click", function () {
+    previewFrame.style.width = "100%";
+
+    previewPcButton.classList.add("active");
+    previewSmartphoneButton.classList.remove("active");
+});
+
+previewSmartphoneButton.addEventListener("click", function () {
+    previewFrame.style.width = "390px";
+
+    previewSmartphoneButton.classList.add("active");
+    previewPcButton.classList.remove("active");
+});    
+    }
+</script>
+<script>
+    const copyButtons =
+        document.querySelectorAll(".copy-button");
+
+    copyButtons.forEach(function (button) {
+
+        button.addEventListener("click", async function () {
+
+            const targetId =
+                button.dataset.copyTarget;
+
+            const targetElement =
+                document.getElementById(targetId);
+
+            if (!targetElement) {
+                return;
+            }
+
+            const code =
+                targetElement.textContent;
+
+            try {
+
+                if (navigator.clipboard) {
+
+                    await navigator.clipboard.writeText(code);
+
+                } else {
+
+                    const temporaryTextarea =
+                        document.createElement("textarea");
+
+                    temporaryTextarea.value = code;
+
+                    document.body.appendChild(temporaryTextarea);
+
+                    temporaryTextarea.select();
+
+                    document.execCommand("copy");
+
+                    temporaryTextarea.remove();
+                }
+
+                const originalText =
+                    button.textContent;
+
+                button.textContent =
+                    "コピーしました";
+
+                setTimeout(function () {
+                    button.textContent = originalText;
+                }, 1500);
+
+            } catch (error) {
+
+                console.error(
+                    "コピーに失敗しました:",
+                    error
+                );
+            }
+
+        });
+
+    });
+</script>
+<script>
+    const createForm =
+        document.getElementById("createForm");
+
+    const createSubmitButton =
+        document.getElementById("createSubmitButton");
+
+    const createSpinner =
+        document.getElementById("createSpinner");
+
+    const createButtonText =
+        document.getElementById("createButtonText");
+
+    if (
+        createForm &&
+        createSubmitButton &&
+        createSpinner &&
+        createButtonText
+    ) {
+
+        createForm.addEventListener("submit", function () {
+
+            createSubmitButton.disabled = true;
+
+            createButtonText.textContent =
+                "AI生成中...";
+
+            createSpinner.classList.add("show");
+        });
+
+    }
+</script>
+</body>
+</html>

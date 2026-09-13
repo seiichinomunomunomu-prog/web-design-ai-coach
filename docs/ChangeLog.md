@@ -368,7 +368,7 @@ PASS
 
 Phase 7.1 完了。
 
-## Review Mode v1.1 - Phase 8（開発中）
+## Review Mode v1.1 - Phase 8（完了）
 
 ### Focused Review機能追加
 
@@ -425,12 +425,56 @@ Focused Reviewでも使用する見出しが一部出力される場合がある
 追加のPrompt制約による既存機能への副作用を避けるため、
 現状のSystem Promptを基準としてFIXする。
 
-### Phase 8 今後の予定
+### UI改善
 
-- AI添削中インジケーターの追加
-- 添削中の二重送信防止
-- HTML / CSS / JavaScriptコードクリア機能の追加
-- UI動作テスト
-- ローカル最終確認
-- Render公開・公開後確認
-- Review Mode v1.1最終FIX
+#### UI-01：AI添削中インジケーター
+
+- AI添削ボタン押下後に「AI添削中...」を表示
+- 添削中にスピナーを表示
+- 添削中はAI添削ボタンを無効化し、二重送信を防止
+- 添削中はコードクリアボタンを表示したまま操作不可
+- 回答完了後は通常状態へ復帰
+
+#### UI-02：コードクリア機能
+
+- HTML / CSS / JavaScriptを一括クリア
+- 質問欄の入力内容は保持
+- AI添削ボタン付近にコードクリアボタンを配置
+
+### UI動作テスト
+
+- UI-01：PASS
+- UI-02：PASS
+- AI添削中表示：OK
+- スピナー表示：OK
+- 二重送信防止：OK
+- 添削中のコードクリア操作無効化：OK
+- HTML / CSS / JavaScriptコードクリア：OK
+- 質問欄保持：OK
+
+### 公開
+
+- ローカル最終確認：PASS
+- Git commit：`a973c19 Add focused review and UI improvements`
+- GitHub `master` へpush：完了
+- Render Auto-Deploy：成功
+- Render公開環境：Live
+- 公開環境確認：PASS
+
+### Phase 8 完了
+
+Focused Reviewの追加およびUI改善を完了。
+
+Focused Reviewでは、具体的な質問に対して必要な修正を中心に回答しながら、
+関連するHTML / CSS / JavaScriptのCrossCheck能力を維持できることを確認した。
+
+UI改善では、AI添削中の状態表示、二重送信防止、
+コードクリア機能を追加し、ローカル環境およびRender公開環境で正常動作を確認した。
+
+F05のGeneral Reviewに一部Focused Review系の見出しが混在する場合がある点は、
+既知の軽微課題として許容する。
+
+追加のPrompt制約による副作用を避け、
+現在のSystem PromptをReview Mode v1.1の基準としてFIXする。
+
+**Review Mode v1.1 / Phase 8：完了**
