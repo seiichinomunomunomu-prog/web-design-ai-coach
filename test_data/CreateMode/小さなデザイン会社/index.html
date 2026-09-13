@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="小さな会社やお店の魅力を伝えるWebデザイン会社、ミナトデザインのホームページです。">
+  <title>ミナトデザイン | 小さなWebデザイン会社</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="company-logo" href="#top" aria-label="ミナトデザイン トップページへ">
+        <span class="logo-mark" aria-hidden="true">M</span>
+        <span>ミナトデザイン</span>
+      </a>
+
+      <button class="menu-button" type="button" aria-label="メニューを開く" aria-controls="global-navigation" aria-expanded="false">
+        <span class="menu-line"></span>
+        <span class="menu-line"></span>
+        <span class="menu-line"></span>
+      </button>
+
+      <nav id="global-navigation" class="global-navigation" aria-label="メインナビゲーション">
+        <ul>
+          <li><a href="#top">ホーム</a></li>
+          <li><a href="#services">サービス</a></li>
+          <li><a href="#company">会社情報</a></li>
+          <li><a class="nav-contact" href="mailto:info@example.jp">お問い合わせ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-decoration hero-decoration-one" aria-hidden="true"></div>
+      <div class="hero-decoration hero-decoration-two" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <p class="hero-label">DESIGN FOR YOUR BUSINESS</p>
+        <h1>想いが伝わる、<br>やさしいWebデザイン。</h1>
+        <p class="hero-description">小さな会社やお店に寄り添い、魅力をきちんと届けるホームページを制作します。</p>
+        <a class="primary-button" href="#services">私たちにできること</a>
+      </div>
+    </section>
+
+    <section id="services" class="services section-container">
+      <div class="section-heading">
+        <p class="section-label">SERVICES</p>
+        <h2>サービス紹介</h2>
+        <p>目的や課題に合わせて、必要なものを分かりやすくご提案します。</p>
+      </div>
+
+      <div class="service-grid">
+        <article class="service-card">
+          <div class="service-icon" aria-hidden="true">01</div>
+          <h3>Webサイト制作</h3>
+          <p>会社やお店の魅力が伝わる、見やすく使いやすいホームページを設計・制作します。</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon" aria-hidden="true">02</div>
+          <h3>スマートフォン対応</h3>
+          <p>パソコンはもちろん、スマートフォンでも快適に閲覧できるデザインに整えます。</p>
+        </article>
+
+        <article class="service-card">
+          <div class="service-icon" aria-hidden="true">03</div>
+          <h3>運用・更新サポート</h3>
+          <p>公開後の文章や写真の変更など、Webサイトを長く活用するための運用を支えます。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="company" class="company-section">
+      <div class="company-inner section-container">
+        <div class="company-message">
+          <p class="section-label">COMPANY</p>
+          <h2>会社情報</h2>
+          <p>お客様との対話を大切にし、身近なパートナーとして一つひとつ丁寧に制作しています。</p>
+        </div>
+
+        <dl class="company-details">
+          <div class="company-row">
+            <dt>会社名</dt>
+            <dd>ミナトデザイン株式会社</dd>
+          </div>
+          <div class="company-row">
+            <dt>所在地</dt>
+            <dd>〒000-0000 東京都〇〇区〇〇 1-2-3</dd>
+          </div>
+          <div class="company-row">
+            <dt>設立</dt>
+            <dd>2020年4月</dd>
+          </div>
+          <div class="company-row">
+            <dt>事業内容</dt>
+            <dd>Webサイトの企画・デザイン・制作・運用支援</dd>
+          </div>
+          <div class="company-row">
+            <dt>メール</dt>
+            <dd><a href="mailto:info@example.jp">info@example.jp</a></dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-logo">ミナトデザイン</p>
+      <p><small>&copy; 2025 Minato Design. All Rights Reserved.</small></p>
+    </div>
+  </footer>
+
+  <script src="style.js"></script>
+</body>
+</html>

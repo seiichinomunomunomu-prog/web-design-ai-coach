@@ -478,3 +478,112 @@ F05のGeneral Reviewに一部Focused Review系の見出しが混在する場合�
 現在のSystem PromptをReview Mode v1.1の基準としてFIXする。
 
 **Review Mode v1.1 / Phase 8：完了**
+
+## Create Mode v0.1 - Phase 9（完了）
+
+### Create Mode機能追加
+
+自然な日本語で作りたいWebページの要望を入力すると、
+AIがHTML / CSS / JavaScriptを生成するCreate Modeを追加した。
+
+Review Modeとは処理およびDifyアプリを分離し、
+既存のReview Mode v1.1へ影響を与えない構成とした。
+
+### 主な変更
+
+- `/create` にCreate Modeを追加
+- Review Mode / Create Modeのモード切替UIを追加
+- 自然言語からHTML / CSS / JavaScriptを生成
+- HTML / CSS / JavaScriptを個別表示
+- 各コードのコピー機能を追加
+- JavaScript不要時は未使用メッセージを表示
+- 生成結果の説明を表示
+- PC / Smartphone Preview切替を追加
+- iframeによるPreview分離
+- AI生成中のスピナー表示
+- 生成中の二重送信を防止
+- 再生成中は直前の生成結果を保持
+- Timeout / 通信 / HTTP / JSON解析 / 必須項目不足のエラー処理を追加
+- Create Mode専用Dify APIキー `DIFY_CREATE_API_KEY` を追加
+
+### Standalone対応
+
+生成されたコードを以下の構成で保存した場合に、
+単独のWebページとして動作できるようにした。
+
+- `index.html`
+- `style.css`
+- `style.js`
+- `images/`
+
+HTMLから `style.css` を読み込み、
+JavaScriptが必要な場合は `style.js` を読み込む。
+
+画像は `images/` フォルダを参照する構成とした。
+
+Previewでは外部の `style.css` / `style.js` を読み込まず、
+生成されたCSS / JavaScriptをiframe内へ埋め込むことで、
+アプリ本体から分離して表示・実行する構成とした。
+
+### テスト
+
+- C01～C05 Create Mode基本生成テスト：PASS
+- JSなしStandaloneテスト：PASS
+- JSありStandaloneテスト：PASS
+- 画像ありStandaloneテスト：PASS
+- Preview CSS反映：PASS
+- Preview JavaScript動作：PASS
+- PC / Smartphone切替：PASS
+- HTML / CSS / JavaScript個別コピー：PASS
+- JavaScriptなし時コピー無効化：PASS
+- AI生成中表示・二重送信防止：PASS
+- 再生成時の旧生成結果保持：PASS
+- Timeoutエラー：PASS
+- 通信エラー：PASS
+- HTTPエラー：PASS
+- JSON解析エラー：PASS
+- 必須項目不足エラー：PASS
+
+### Review Mode回帰テスト
+
+Create Mode追加後にReview Mode v1.1の回帰確認を実施。
+
+- General Review：PASS
+- Focused Review：PASS
+- General Review回答形式：正常
+- Focused Review回答形式：正常
+- HTML / CSS / JavaScript CrossCheck：正常
+
+Create Mode追加によるReview Mode v1.1への
+機能上の回帰は確認されなかった。
+
+### 公開
+
+- ローカル最終確認：PASS
+- Git commit：`794dab9 Add Create Mode v0.1`
+- GitHub `master` へpush：完了
+- Render Environmentに `DIFY_CREATE_API_KEY` を追加
+- Render Deploy：成功
+- Render公開環境：Live
+- 公開環境 Review Mode / Create Mode切替：PASS
+- 公開環境 Create Mode JSなし生成：PASS
+- 公開環境 Create Mode JSあり生成：PASS
+- 公開環境 Smartphoneハンバーガーメニュー動作：PASS
+- 公開環境 Preview：PASS
+- 公開環境 PC / Smartphone切替：PASS
+- 公開環境 説明表示：PASS
+
+### Phase 9 完了
+
+Create Mode v0.1の実装、ローカルテスト、
+Review Mode v1.1の回帰テスト、
+GitHubへの反映およびRender公開を完了した。
+
+自然言語の要望からHTML / CSS / JavaScriptを生成し、
+コードの個別コピー、Preview、PC / Smartphone表示確認までを
+一つのWebアプリ内で実行できることを確認した。
+
+また、生成コードをファイルへコピーすることで、
+StandaloneのWebページとして利用できることも確認した。
+
+**Create Mode v0.1 / Phase 9：完了**

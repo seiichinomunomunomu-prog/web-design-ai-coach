@@ -815,3 +815,157 @@ Mode判定：5 / 5 成功
 `docs/CreateMode_Spec.md`
 
 **Step 1：完了**
+
+### Step 2：Create Mode画面仕様
+
+- [x] 自然言語入力欄の仕様を確定
+- [x] HTML / CSS / JavaScriptの表示順を確定
+- [x] 各コードの個別コピー仕様を確定
+- [x] JavaScript不要時の表示仕様を確定
+- [x] Preview表示仕様を確定
+- [x] PC / Smartphone切替仕様を確定
+- [x] 生成中・再生成・エラー時の画面状態を確定
+- [x] 説明表示の仕様を確定
+
+**Step 2：完了**
+
+### Step 3：Dify Create Mode設計
+
+- [x] Review Modeとは別のDify Chatflowを作成
+- [x] Create Mode専用System Promptを作成
+- [x] HTML / CSS / JavaScript / explanationの4項目を定義
+- [x] Structured Outputを設定
+- [x] JavaScript不要時は空文字とするルールを設定
+- [x] HTML / CSS / JavaScript CrossCheckルールを設定
+- [x] Responsive対応ルールを設定
+- [x] Framework / 外部ライブラリを使用しない方針を設定
+- [x] Standalone用ファイル構成ルールを設定
+- [x] imagesフォルダ参照ルールを設定
+- [x] C01～C05テスト PASS
+
+**Step 3：完了**
+
+### Step 4：FastAPI / Create Mode実装
+
+- [x] `/create` GETを追加
+- [x] `/create` POSTを追加
+- [x] Create Mode専用 `DIFY_CREATE_API_KEY` を追加
+- [x] FastAPIからCreate用Dify APIへ接続
+- [x] JSON 4項目を解析
+- [x] HTML / CSS / JavaScript / 説明を表示
+- [x] iframe Previewを実装
+- [x] Preview内CSS埋め込みを実装
+- [x] Preview内JavaScript埋め込みを実装
+- [x] PC / Smartphone Preview切替を実装
+- [x] HTML / CSS / JavaScript個別コピーを実装
+- [x] JavaScriptなし時コピー無効化を実装
+- [x] AI生成中表示・スピナーを実装
+- [x] 二重送信防止を実装
+- [x] 再生成中の旧生成結果保持を確認
+- [x] Review Mode / Create Mode切替UIを追加
+
+**Step 4：完了**
+
+### Step 5：エラー処理
+
+- [x] Timeoutエラー処理
+- [x] 通信エラー処理
+- [x] HTTPエラー処理
+- [x] JSON解析エラー処理
+- [x] 必須項目不足エラー処理
+- [x] エラー時に入力内容を保持
+- [x] 内部エラーを画面へ直接表示しないことを確認
+- [x] 正常系回帰確認 PASS
+
+**Step 5：完了**
+
+### Step 6：Standalone対応
+
+生成コードを以下の構成で保存して、
+単独のWebページとして利用できる構成とする。
+
+- `index.html`
+- `style.css`
+- `style.js`
+- `images/`
+
+確認項目：
+
+- [x] HTMLから `style.css` を読み込む
+- [x] JavaScript使用時は `style.js` を読み込む
+- [x] JavaScript不要時は `style.js` を読み込まない
+- [x] CSS出力に `<style>` を含めない
+- [x] JavaScript出力に `<script>` を含めない
+- [x] 画像は `images/` を参照
+- [x] JSなし＋画像ありStandaloneテスト PASS
+- [x] JSあり＋画像ありStandaloneテスト PASS
+- [x] Previewでは外部CSS / JavaScript参照を除去
+- [x] Preview内へ生成CSS / JavaScriptを埋め込む
+
+**Step 6：完了**
+
+### Step 7：Review Mode v1.1回帰確認
+
+- [x] General Review回帰確認 PASS
+- [x] Focused Review回帰確認 PASS
+- [x] General Review回答形式正常
+- [x] Focused Review回答形式正常
+- [x] HTML / CSS / JavaScript CrossCheck正常
+- [x] Create Mode追加によるReview Modeへの機能上の回帰なし
+
+**Step 7：完了**
+
+### Step 8：ローカル最終確認
+
+- [x] Create Mode JSなし生成 PASS
+- [x] Create Mode JSあり生成 PASS
+- [x] Preview PASS
+- [x] Smartphoneハンバーガーメニュー PASS
+- [x] PC / Smartphone切替 PASS
+- [x] コードコピー PASS
+- [x] 説明表示 PASS
+- [x] エラー処理 PASS
+- [x] Standalone動作 PASS
+
+**Step 8：完了**
+
+### Step 9：Git / GitHub
+
+- [x] Git変更内容確認
+- [x] テストデータを `test_data/CreateMode/` に保存
+- [x] Git commit
+- [x] Commit：`794dab9 Add Create Mode v0.1`
+- [x] GitHub `master` へpush
+
+**Step 9：完了**
+
+### Step 10：Render公開
+
+- [x] Render Environmentに `DIFY_CREATE_API_KEY` を追加
+- [x] Render Deploy成功
+- [x] 公開環境 Live確認
+- [x] Review Mode / Create Mode切替 PASS
+- [x] Create Mode JSなし生成 PASS
+- [x] Create Mode JSあり生成 PASS
+- [x] Preview PASS
+- [x] PC / Smartphone切替 PASS
+- [x] Smartphoneハンバーガーメニュー PASS
+- [x] 説明表示 PASS
+
+**Step 10：完了**
+
+### Phase 9 完了判定
+
+- [x] Create Mode v0.1要件を実装
+- [x] Dify Create Modeを構築
+- [x] FastAPIとの連携を完了
+- [x] Preview機能を実装
+- [x] Standalone生成コードの動作確認
+- [x] エラー処理確認
+- [x] Review Mode v1.1回帰確認
+- [x] ローカル最終確認
+- [x] GitHub反映
+- [x] Render公開
+- [x] 公開環境最終確認 PASS
+
+**Phase 9：Create Mode v0.1 完了**
